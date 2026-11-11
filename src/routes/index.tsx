@@ -91,9 +91,9 @@ function Index() {
       <section className="bg-hero px-5 pb-16 pt-12 md:pt-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
           <div>
-            <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent-foreground">+120 diagnósticos · Split</span>
+            <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent-foreground">Guia de Diagnóstico para Ar-Condicionado Split</span>
             <h1 className="mt-5 text-3xl font-extrabold leading-tight md:text-5xl">
-              Identifique o defeito do Split <span className="text-primary">antes de trocar qualquer peça</span>
+              <span className="text-primary">+120 Diagnósticos para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
             </h1>
             <p className="mt-5 text-lg text-muted-foreground">
               Sintoma, causas prováveis, verificações na ordem certa e próximo passo — tudo em uma página, para consultar com o aparelho aberto.

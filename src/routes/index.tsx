@@ -1,19 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const IMG = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/49844e71-60b8-4a59-b028-f7cfed1285be/";
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
-const HERO = IMG + "hero-mockup_hero-1785976042289.webp";
+const HERO = "/mockups/hero.webp";
 const CHECKOUT_BASIC = "https://pay.kirvano.com/03f6a55e-3583-4147-8971-86045aac043a";
 const CHECKOUT_FULL = "https://pay.kirvano.com/29e8355a-ef31-449f-a312-3823f99fcbfd";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "+120 Diagnósticos para Ar-Condicionado Split" },
-      { name: "description", content: "120 diagnósticos prontos para identificar o defeito do Split antes de trocar qualquer peça." },
-      { property: "og:title", content: "+120 Diagnósticos para Ar-Condicionado Split" },
-      { property: "og:description", content: "Sintoma, causas, verificações e próximo passo em uma página só." },
+      { title: "Diagnósticos para Ar-Condicionado Split" },
+      { name: "description", content: "Diagnósticos ilustrados para identificar o defeito do Split antes de trocar qualquer peça." },
+      { property: "og:title", content: "Diagnósticos para Ar-Condicionado Split" },
+      { property: "og:description", content: "Sintoma, causas prováveis, verificações na ordem e próximo passo em uma página ilustrada." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:image", content: HERO },
@@ -23,45 +24,46 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const samples = ["materiais-el_b3e130f0_e0c545-1785976392534", "materiais-mat_1-1785976153891", "materiais-mat_2-1785976155678", "materiais-mat_3-1785976157359", "materiais-mat_4-1785976159478", "materiais-mat_6d32d53c-1785976162463"];
+const samples = Array.from({ length: 16 }, (_, i) => i + 1).map((n) => `/mockups/diagnostico-${n}.webp`);
 
 const features = [
-  "Um defeito inteiro em uma página: sintoma, causas prováveis, verificações na ordem e próximo passo.",
-  "Organização por sintoma e por sistema, com índice para achar o diagnóstico em poucos toques.",
-  "Versão digital para o celular e versão A4 para imprimir.",
-  "Download imediato, sem mensalidade e com acesso vitalício.",
+  ["Ilustração que aponta onde olhar", "Cada página mostra o aparelho com os pontos numerados: você vê exatamente qual componente verificar."],
+  ["Causas mais prováveis, em ordem", "As causas vêm classificadas como muito comum, comum ou menos comum. Você começa pelo que mais acontece."],
+  ["Verificações na ordem certa", "Passo a passo do que medir ou inspecionar, com o resultado que confirma ou descarta cada causa."],
+  ["Próximo passo em formato SE → ENTÃO", "Conforme o que você encontrou na medição, a página já diz para onde seguir."],
+  ["Alerta \"Antes de trocar a peça\"", "O erro que mais gera retorno do cliente naquele defeito, para você não cair nele."],
+  ["Sistema, aplicação e ferramenta", "Logo no topo: qual sistema investigar, se vale para convencional ou inverter e qual instrumento separar."],
 ];
 
 const ideal = [
   ["Parar de diagnosticar no chute", "Um caminho definido para cada sintoma, em vez de trocar peça até funcionar."],
   ["Saber por onde começar", "Abra no sintoma e já tenha a primeira verificação na frente."],
   ["Confirmar antes de trocar", "Descarte as outras causas antes de condenar placa, capacitor ou compressor."],
-  ["Não parar para procurar vídeo", "Resolva a dúvida no celular, em segundos, sem depender de grupo."],
-  ["Segurança diante do cliente", "Explique o problema com base em verificação, não em suposição."],
+  ["Evitar o retorno do cliente", "Ache a causa de verdade, e não só o sintoma, para o defeito não voltar na semana seguinte."],
+  ["Segurança diante do cliente", "Explique o problema com base em medição, não em suposição."],
   ["Atender mais rápido", "Menos tentativa e erro, mais espaço na agenda."],
 ];
 
 const blocks = [
-  "Não gela ou gela pouco", "Não liga ou desliga sozinho", "Parte elétrica", "Água e gelo",
-  "Ruídos e vibrações", "Comando e controle", "Códigos de erro", "Inverter",
+  "Não gela ou gela pouco", "Não liga, desarma ou desliga sozinho", "Parte elétrica (disjuntor, DR, placa)",
+  "Drenagem: pinga e vaza água", "Ventilação e fluxo de ar", "Ruídos, estalos e vibração",
+  "Comando, controle remoto e display", "Erros de instalação e de comunicação",
 ];
 
 const bonus = [
-  ["+40 Diagnósticos de Defeitos Menos Frequentes", "bonus-bonus_1_img-1785973977326"],
-  ["+30 Diagnósticos de Erros de Instalação", "bonus-bonus_2_img-1785973980105"],
-  ["Guia Rápido de Ferramentas para Diagnóstico", "bonus-bonus_3_img-1785973983817"],
-  ["Tabela de Pressões e Gases Refrigerantes", "bonus-bonus_4_img-1785973988053"],
-  ["Checklist Antes da Troca de Componentes", "bonus-bonus_5_img-1785973993301"],
-  ["Erros de Diagnóstico Mais Comuns", "bonus-bonus_6_img-1785973996243"],
+  ["Checklist de Atendimento e Registro de Sintomas", "Organize as informações do cliente, as condições encontradas e o histórico do equipamento."],
+  ["Ferramentas e Instrumentos de Diagnóstico", "Entenda a finalidade dos instrumentos, suas limitações e os cuidados de utilização."],
+  ["Erros de Instalação: Guia de Observação", "Consulte sinais que merecem investigação e registre os pontos que precisam de avaliação."],
+  ["Relatório Técnico e Explicação ao Cliente", "Modelos para apresentar as verificações realizadas, os resultados e as recomendações."],
 ];
 
 const faq = [
-  ["Serve para inverter ou só convencional?", "Serve para os dois. Há um bloco específico com as particularidades de aparelhos inverter."],
+  ["Serve para inverter ou só convencional?", "Serve para os dois. Cada diagnóstico indica no topo se vale para convencional, inverter ou ambos."],
   ["Serve para a marca que eu atendo?", "Sim. O material é organizado por sintoma e sistema, não por marca. A lógica vale para qualquer fabricante."],
   ["Ensina instalação, carga de gás e solda?", "Não. O foco é o diagnóstico: identificar a causa e saber o que verificar antes de trocar componente."],
-  ["Sou iniciante, vou conseguir usar?", "Sim. Linguagem direta e cada diagnóstico já vem com a ordem das verificações."],
-  ["Já tenho experiência, vai ser básico?", "É material de consulta, usado como checklist para não pular etapa e conferir sintomas raros."],
-  ["Preciso de internet no cliente?", "Não. São PDFs que ficam salvos no seu aparelho, e dá para imprimir em A4."],
+  ["Sou iniciante, vou conseguir usar?", "Sim. Cada página é ilustrada, com linguagem direta e as verificações já na ordem em que devem ser feitas."],
+  ["Já tenho experiência, vai ser básico?", "É material de consulta, usado como checklist para não pular etapa, conferir o próximo passo e evitar troca de peça desnecessária."],
+  ["Preciso de internet no cliente?", "Não. É um PDF que fica salvo no seu celular, e você também pode imprimir."],
   ["E se eu não gostar?", "Você tem 30 dias para pedir o reembolso, sem burocracia."],
 ];
 
@@ -93,30 +95,37 @@ function Index() {
           <div>
             <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent-foreground">Guia de Diagnóstico para Ar-Condicionado Split</span>
             <h1 className="mt-5 text-3xl font-extrabold leading-tight md:text-5xl">
-              <span className="text-primary">+120 Diagnósticos para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
+              <span className="text-primary">Diagnósticos ilustrados para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
             </h1>
             <p className="mt-5 text-lg text-muted-foreground">
-              Sintoma, causas prováveis, verificações na ordem certa e próximo passo — tudo em uma página, para consultar com o aparelho aberto.
+              Cada defeito em uma página ilustrada: onde olhar, causas mais prováveis, verificações na ordem certa e o próximo passo. Para consultar no celular com o aparelho aberto.
             </p>
-            <a href="#planos" className="btn-cta mt-8 w-full md:w-auto">QUERO OS 120 DIAGNÓSTICOS</a>
+            <a href="#planos" className="btn-cta mt-8 w-full md:w-auto">QUERO OS DIAGNÓSTICOS</a>
             <p className="mt-3 text-sm text-muted-foreground">Receba na hora no WhatsApp e no e-mail</p>
           </div>
           <img src={HERO} alt="Material de diagnósticos para ar-condicionado" className="w-full" />
         </div>
       </section>
 
-      <Section title="Como são os diagnósticos">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {samples.map((s) => (
-            <img key={s} src={IMG + s + ".webp"} alt="Exemplo de diagnóstico" loading="lazy" className="w-full rounded-xl border bg-card shadow-card" />
-          ))}
-        </div>
+      <Section title="Veja o produto por dentro">
+        <p className="-mt-6 mb-8 text-center text-muted-foreground">Arraste para o lado e confira páginas reais do material.</p>
+        <Carousel opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
+          <CarouselContent>
+            {samples.map((s, i) => (
+              <CarouselItem key={s} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
+                <img src={s} alt={`Página de diagnóstico ${i + 1}`} loading={i < 3 ? "eager" : "lazy"} className="w-full rounded-xl border bg-card shadow-card" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
       </Section>
 
-      <Section className="bg-muted" title="O que cada diagnóstico tem">
+      <Section className="bg-muted" title="O que cada página de diagnóstico traz">
         <div className="grid gap-4 md:grid-cols-2">
-          {features.map((f) => (
-            <div key={f} className="flex gap-3 rounded-xl border bg-card p-5"><Check /><p>{f}</p></div>
+          {features.map(([t, d]) => (
+            <div key={t} className="flex gap-3 rounded-xl border bg-card p-5"><Check /><div><h3 className="font-bold">{t}</h3><p className="mt-1 text-sm text-muted-foreground">{d}</p></div></div>
           ))}
         </div>
       </Section>
@@ -134,9 +143,9 @@ function Index() {
 
       <Section className="bg-muted" title="Tudo o que você recebe">
         <div className="grid items-center gap-10 md:grid-cols-2">
-          <img src={IMG + "pacote-mockup_pacote-1785976032769.webp"} alt="Pacote completo" loading="lazy" className="w-full" />
+          <img src="/mockups/pacote.webp" alt="Pacote completo" loading="lazy" className="w-full" />
           <div>
-            <p className="mb-4 font-semibold">8 blocos organizados por sintoma:</p>
+            <p className="mb-4 font-semibold">Diagnósticos organizados por sintoma e sistema:</p>
             <ol className="grid gap-2">
               {blocks.map((b, i) => (
                 <li key={b} className="flex items-center gap-3 rounded-lg bg-card px-4 py-3 text-sm">
@@ -144,20 +153,20 @@ function Index() {
                 </li>
               ))}
             </ol>
-            <p className="mt-4 text-sm text-muted-foreground">+ índice por sintoma, guia de uso, versão digital e A4, acesso vitalício.</p>
+            <p className="mt-4 text-sm text-muted-foreground">Material em PDF para o celular, que também pode ser impresso. Acesso imediato e vitalício.</p>
           </div>
         </div>
       </Section>
 
-      <Section title="6 bônus exclusivos">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {bonus.map(([t, img], i) => (
+      <Section title="Receba também quatro materiais complementares">
+        <div className="grid gap-4 md:grid-cols-2">
+          {bonus.map(([t, d], i) => (
             <div key={t} className="overflow-hidden rounded-xl border bg-card">
-              <img src={IMG + img + ".webp"} alt={t} loading="lazy" className="aspect-square w-full object-cover" />
-              <div className="p-4">
-                <span className="text-xs font-bold text-primary">BÔNUS #{i + 1}</span>
-                <h3 className="mt-1 text-sm font-bold">{t}</h3>
-                <p className="mt-2 text-xs text-muted-foreground"><s>R$27</s> <b className="text-success">GRÁTIS</b></p>
+              <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" className="aspect-[4/3] w-full object-cover object-top" />
+              <div className="p-6">
+                <span className="text-xs font-bold text-primary">BÔNUS {i + 1}</span>
+                <h3 className="mt-1 text-lg font-bold">{t}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{d}</p>
               </div>
             </div>
           ))}
@@ -167,9 +176,9 @@ function Index() {
       <Section className="bg-muted" title="Escolha seu plano">
         <div id="planos" className="mx-auto grid max-w-4xl scroll-mt-8 items-start gap-6 md:grid-cols-2">
           <Plan name="Básico" from="47,90" price="17,90" inst="4x de R$4,48" href={CHECKOUT_BASIC}
-            items={["+120 diagnósticos para Split", "Índice por sintoma e guia de uso", "Versão digital e imprimível", "Acesso imediato e vitalício"]} />
+            items={["Diagnósticos ilustrados para Split", "Organizados por sintoma e sistema", "PDF para celular e para imprimir", "Acesso imediato e vitalício"]} />
           <Plan featured name="Completo" from="147,90" price="27,90" inst="6x de R$6,32" href={CHECKOUT_FULL}
-            items={["Tudo do plano Básico", "Os 6 bônus exclusivos", "Atualizações futuras", "Acesso vitalício"]} />
+            items={["Tudo do plano Básico", "Checklist de Atendimento e Registro de Sintomas", "Ferramentas e Instrumentos de Diagnóstico", "Erros de Instalação: Guia de Observação", "Relatório Técnico e Explicação ao Cliente"]} />
         </div>
         <p className="mt-6 text-center text-sm text-muted-foreground">🔒 Compra 100% segura</p>
       </Section>

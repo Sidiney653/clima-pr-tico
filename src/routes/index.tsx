@@ -169,10 +169,10 @@ function Index() {
           {bonus.map(([t, d], i) => (
             <div key={t} className="overflow-hidden rounded-xl border bg-card">
               <div className="flex justify-center bg-gradient-to-b from-muted to-card px-8 pb-4 pt-10">
-                <div className="relative w-3/5">
+                <div className="relative w-4/5">
                   <div className="absolute inset-0 translate-x-3 translate-y-2 rotate-6 rounded-sm bg-white shadow-md" />
                   <div className="absolute inset-0 translate-x-1.5 translate-y-1 rotate-3 rounded-sm bg-white shadow-md" />
-                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" className="relative aspect-[3/4] w-full -rotate-2 rounded-sm border border-black/5 bg-white object-cover object-top shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
+                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" decoding="async" style={{ imageRendering: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }} className="relative w-full rounded-sm border border-black/5 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
                 </div>
               </div>
               <div className="p-6">

@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
-const IMG = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/49844e71-60b8-4a59-b028-f7cfed1285be/";
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
 const HERO = "/mockups/hero.webp";
 const CHECKOUT_BASIC = "https://pay.kirvano.com/03f6a55e-3583-4147-8971-86045aac043a";
@@ -20,6 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: HERO },
       { name: "twitter:image", content: HERO },
     ],
+    links: [{ rel: "preload", as: "image", href: HERO, type: "image/webp", fetchPriority: "high" } as any],
   }),
   component: Index,
 });
@@ -103,7 +103,7 @@ function Index() {
             <h1 className="mt-5 text-3xl font-extrabold leading-tight md:text-5xl">
               <span className="text-primary">Diagnósticos ilustrados para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
             </h1>
-            <img src={HERO} alt="Material de diagnósticos para ar-condicionado" className="mx-auto mt-8 w-full max-w-xl" />
+            <img src={HERO} alt="Material de diagnósticos para ar-condicionado" width={1100} height={781} fetchPriority="high" decoding="async" className="mx-auto mt-8 h-auto w-full max-w-xl" />
             <p className="mt-5 text-lg text-muted-foreground">
               Cada defeito em uma página ilustrada: onde olhar, causas mais prováveis, verificações na ordem certa e o próximo passo. Para consultar no celular com o aparelho aberto.
             </p>
@@ -119,7 +119,7 @@ function Index() {
           <CarouselContent>
             {samples.map((s, i) => (
               <CarouselItem key={s} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                <img src={s} alt={`Página de diagnóstico ${i + 1}`} loading={i < 3 ? "eager" : "lazy"} className="w-full rounded-xl border bg-card shadow-card" />
+                <img src={s} alt={`Página de diagnóstico ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" width={760} height={1139} className="h-auto w-full rounded-xl border bg-card shadow-card" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -149,7 +149,7 @@ function Index() {
 
       <Section className="bg-muted" title="Tudo o que você recebe">
         <div className="grid items-center gap-10 md:grid-cols-2">
-          <img src="/mockups/pacote.webp" alt="Pacote completo" loading="lazy" className="w-full" />
+          <img src="/mockups/pacote.webp" alt="Pacote completo" loading="lazy" decoding="async" width={1100} height={626} className="h-auto w-full" />
           <div>
             <p className="mb-4 font-semibold">Diagnósticos organizados por sintoma e sistema:</p>
             <ol className="grid gap-2">
@@ -172,7 +172,7 @@ function Index() {
                 <div className="relative w-4/5">
                   <div className="absolute inset-0 translate-x-3 translate-y-2 rotate-6 rounded-sm bg-white shadow-md" />
                   <div className="absolute inset-0 translate-x-1.5 translate-y-1 rotate-3 rounded-sm bg-white shadow-md" />
-                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" decoding="async" style={{ imageRendering: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }} className="relative w-full rounded-sm border border-black/5 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
+                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" decoding="async" width={700} height={989} style={{ imageRendering: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }} className="relative h-auto w-full rounded-sm border border-black/5 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
                 </div>
               </div>
               <div className="p-6">
@@ -197,7 +197,7 @@ function Index() {
 
       <Section>
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center md:flex-row md:text-left">
-          <img src={IMG2 + "garantia-selo-1784288640730.webp"} alt="Selo de garantia" className="w-36" />
+          <img src={IMG2 + "garantia-selo-1784288640730.webp"} alt="Selo de garantia" loading="lazy" decoding="async" width={144} height={144} className="h-auto w-36" />
           <div>
             <h2 className="text-2xl font-bold">Garantia de 30 dias</h2>
             <p className="mt-2 text-muted-foreground">Se o material não for o que você esperava, peça o reembolso. Sem burocracia — o risco é todo nosso.</p>

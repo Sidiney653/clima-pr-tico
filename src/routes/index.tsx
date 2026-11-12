@@ -4,8 +4,8 @@ import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext
 
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
 const HERO = "/mockups/hero.webp";
-const CHECKOUT_BASIC = "https://pay.kirvano.com/03f6a55e-3583-4147-8971-86045aac043a";
-const CHECKOUT_FULL = "https://pay.kirvano.com/29e8355a-ef31-449f-a312-3823f99fcbfd";
+const CHECKOUT_BASIC = "https://checkout.wiven.com.br/checkout/cmwcvuz8n23x401q2do1f5s45?offer=EBD6LD7";
+const CHECKOUT_FULL = "https://checkout.wiven.com.br/checkout/cmwcw3kic247401pv6blb2533?offer=Y7WJELC";
 
 export const Route = createFileRoute("/")({
   head: () => ({

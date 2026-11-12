@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { withCheckoutUtms } from "@/lib/checkout-tracking";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
@@ -16,8 +17,6 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Sintoma, causas prováveis, verificações na ordem e próximo passo em uma página ilustrada." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: HERO },
-      { name: "twitter:image", content: HERO },
     ],
     links: [{ rel: "preload", as: "image", href: HERO, type: "image/webp", fetchPriority: "high" } as any],
   }),
@@ -225,6 +224,10 @@ function Index() {
 }
 
 function Plan({ name, from, price, inst, items, href, featured }: { name: string; from: string; price: string; inst: string; items: string[]; href: string; featured?: boolean }) {
+  const [trackedHref, setTrackedHref] = useState(href);
+  useEffect(() => {
+    setTrackedHref(withCheckoutUtms(href, window.location.search));
+  }, [href]);
   return (
     <div className={`relative rounded-2xl border bg-card p-7 ${featured ? "border-2 border-primary shadow-card" : ""}`}>
       {featured && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">MAIS VENDIDO</span>}
@@ -237,7 +240,9 @@ function Plan({ name, from, price, inst, items, href, featured }: { name: string
         <p className="font-display text-4xl font-extrabold text-primary">R$ {price}</p>
         <p className="text-sm text-muted-foreground">ou {inst}</p>
       </div>
-      <a href={href} className="btn-cta mt-6 w-full">QUERO O PLANO {name.toUpperCase()}</a>
+      <a href={trackedHref} onClick={(event) => {
+        event.currentTarget.href = withCheckoutUtms(event.currentTarget.href, window.location.search);
+      }} className="btn-cta mt-6 w-full">QUERO O PLANO {name.toUpperCase()}</a>
     </div>
   );
 }

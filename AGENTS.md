@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Place site-wide tracking scripts in the root shell's head because TanStack Start has no index.html entry.
+- Merge page UTM parameters into checkout links after hydration and at click time, preserving checkout offers and any parameters added by tracking scripts.

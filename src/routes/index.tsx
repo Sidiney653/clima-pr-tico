@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const IMG = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/49844e71-60b8-4a59-b028-f7cfed1285be/";
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
@@ -84,6 +84,12 @@ function Section({ title, children, className = "" }: { title?: string; children
 
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
+  const [api, setApi] = useState<CarouselApi>();
+  useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => api.scrollNext(), 3000);
+    return () => clearInterval(id);
+  }, [api]);
   return (
     <main>
       <div className="bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground md:text-sm">
@@ -91,25 +97,25 @@ function Index() {
       </div>
 
       <section className="bg-hero px-5 pb-16 pt-12 md:pt-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
+        <div className="mx-auto max-w-3xl text-center">
           <div>
             <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent-foreground">Guia de Diagnóstico para Ar-Condicionado Split</span>
             <h1 className="mt-5 text-3xl font-extrabold leading-tight md:text-5xl">
               <span className="text-primary">Diagnósticos ilustrados para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
             </h1>
+            <img src={HERO} alt="Material de diagnósticos para ar-condicionado" className="mx-auto mt-8 w-full max-w-xl" />
             <p className="mt-5 text-lg text-muted-foreground">
               Cada defeito em uma página ilustrada: onde olhar, causas mais prováveis, verificações na ordem certa e o próximo passo. Para consultar no celular com o aparelho aberto.
             </p>
             <a href="#planos" className="btn-cta mt-8 w-full md:w-auto">QUERO OS DIAGNÓSTICOS</a>
             <p className="mt-3 text-sm text-muted-foreground">Receba na hora no WhatsApp e no e-mail</p>
           </div>
-          <img src={HERO} alt="Material de diagnósticos para ar-condicionado" className="w-full" />
         </div>
       </section>
 
       <Section title="Veja o produto por dentro">
-        <p className="-mt-6 mb-8 text-center text-muted-foreground">Arraste para o lado e confira páginas reais do material.</p>
-        <Carousel opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
+        <p className="-mt-6 mb-8 text-center text-muted-foreground">Confira páginas reais do material.</p>
+        <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
           <CarouselContent>
             {samples.map((s, i) => (
               <CarouselItem key={s} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
@@ -162,7 +168,13 @@ function Index() {
         <div className="grid gap-4 md:grid-cols-2">
           {bonus.map(([t, d], i) => (
             <div key={t} className="overflow-hidden rounded-xl border bg-card">
-              <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" className="aspect-[4/3] w-full object-cover object-top" />
+              <div className="flex justify-center bg-gradient-to-b from-muted to-card px-8 pb-4 pt-10">
+                <div className="relative w-3/5">
+                  <div className="absolute inset-0 translate-x-3 translate-y-2 rotate-6 rounded-sm bg-white shadow-md" />
+                  <div className="absolute inset-0 translate-x-1.5 translate-y-1 rotate-3 rounded-sm bg-white shadow-md" />
+                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" className="relative aspect-[3/4] w-full -rotate-2 rounded-sm border border-black/5 bg-white object-cover object-top shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
+                </div>
+              </div>
               <div className="p-6">
                 <span className="text-xs font-bold text-primary">BÔNUS {i + 1}</span>
                 <h3 className="mt-1 text-lg font-bold">{t}</h3>

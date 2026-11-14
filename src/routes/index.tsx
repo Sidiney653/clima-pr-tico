@@ -24,6 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 const samples = Array.from({ length: 16 }, (_, i) => i + 1).map((n) => `/mockups/diagnostico-${n}.webp`);
+const testimonials = Array.from({ length: 10 }, (_, i) => i + 1).map((n) => `/mockups/depoimento-${n}.webp`);
 
 const features = [
   ["Ilustração que aponta onde olhar", "Cada página mostra o aparelho com os pontos numerados: você vê exatamente qual componente verificar."],
@@ -84,11 +85,17 @@ function Section({ title, children, className = "" }: { title?: string; children
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [apiDepo, setApiDepo] = useState<CarouselApi>();
   useEffect(() => {
     if (!api) return;
     const id = setInterval(() => api.scrollNext(), 3000);
     return () => clearInterval(id);
   }, [api]);
+  useEffect(() => {
+    if (!apiDepo) return;
+    const id = setInterval(() => apiDepo.scrollNext(), 3000);
+    return () => clearInterval(id);
+  }, [apiDepo]);
   return (
     <main>
       <div className="bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground md:text-sm">
@@ -146,7 +153,21 @@ function Index() {
         </div>
       </Section>
 
-      <Section className="bg-muted" title="Tudo o que você recebe">
+      <Section className="bg-muted" title="Veja o que nossos clientes estão dizendo sobre o Guia de Diagnóstico para Ar-Condicionado">
+        <Carousel setApi={setApiDepo} opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
+          <CarouselContent>
+            {testimonials.map((t, i) => (
+              <CarouselItem key={t} className="basis-[75%] sm:basis-1/2 lg:basis-1/3">
+                <img src={t} alt={`Depoimento de cliente ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" width={941} height={1672} className="h-auto w-full rounded-xl border bg-card shadow-card" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
+      </Section>
+
+      <Section title="Tudo o que você recebe">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <img src="/mockups/pacote.webp" alt="Pacote completo" loading="lazy" decoding="async" width={1100} height={626} className="h-auto w-full" />
           <div>

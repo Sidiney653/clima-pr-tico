@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { withCheckoutUtms } from "@/lib/checkout-tracking";
+import { pageImages } from "@/assets/page-images";
+import { useVisibleCarouselAutoplay } from "@/hooks/use-visible-carousel-autoplay";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
-const HERO = "/mockups/hero.webp";
+const HERO = pageImages.hero;
 const CHECKOUT_BASIC = "https://checkout.wiven.com.br/checkout/cmwcvuz8n23x401q2do1f5s45?offer=EBD6LD7";
 const CHECKOUT_FULL = "https://checkout.wiven.com.br/checkout/cmwcw3kic247401pv6blb2533?offer=Y7WJELC";
 
@@ -18,13 +20,13 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "preload", as: "image", href: HERO, type: "image/webp", fetchPriority: "high" } as any],
+    links: [{ rel: "preload", as: "image", href: HERO.src, imageSrcSet: HERO.srcSet, imageSizes: "(max-width: 615px) calc(100vw - 40px), 576px", type: "image/webp", fetchPriority: "high" }],
   }),
   component: Index,
 });
 
-const samples = Array.from({ length: 16 }, (_, i) => i + 1).map((n) => `/mockups/diagnostico-${n}.webp`);
-const testimonials = Array.from({ length: 10 }, (_, i) => i + 1).map((n) => `/mockups/depoimento-${n}.webp`);
+const samples = Array.from({ length: 16 }, (_, i) => pageImages[`diagnostico-${i + 1}` as keyof typeof pageImages]);
+const testimonials = Array.from({ length: 10 }, (_, i) => pageImages[`depoimento-${i + 1}` as keyof typeof pageImages]);
 
 const features = [
   ["Ilustração que aponta onde olhar", "Cada página mostra o aparelho com os pontos numerados: você vê exatamente qual componente verificar."],
@@ -86,16 +88,8 @@ function Index() {
   const [open, setOpen] = useState<number | null>(0);
   const [api, setApi] = useState<CarouselApi>();
   const [apiDepo, setApiDepo] = useState<CarouselApi>();
-  useEffect(() => {
-    if (!api) return;
-    const id = setInterval(() => api.scrollNext(), 3000);
-    return () => clearInterval(id);
-  }, [api]);
-  useEffect(() => {
-    if (!apiDepo) return;
-    const id = setInterval(() => apiDepo.scrollNext(), 3000);
-    return () => clearInterval(id);
-  }, [apiDepo]);
+  useVisibleCarouselAutoplay(api);
+  useVisibleCarouselAutoplay(apiDepo);
   return (
     <main>
       <div className="bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground md:text-sm">
@@ -109,7 +103,7 @@ function Index() {
             <h1 className="mt-5 text-3xl font-extrabold leading-tight md:text-5xl">
               <span className="text-primary">Diagnósticos ilustrados para Ar-Condicionado Split</span>: descubra o defeito antes de trocar qualquer peça
             </h1>
-            <img src={HERO} alt="Material de diagnósticos para ar-condicionado" width={1100} height={781} fetchPriority="high" decoding="async" className="mx-auto mt-8 h-auto w-full max-w-xl" />
+            <img {...HERO} sizes="(max-width: 615px) calc(100vw - 40px), 576px" alt="Material de diagnósticos para ar-condicionado" fetchPriority="high" decoding="async" className="mx-auto mt-8 h-auto w-full max-w-xl" />
             <p className="mt-5 text-lg text-muted-foreground">
               Cada defeito em uma página ilustrada: onde olhar, causas mais prováveis, verificações na ordem certa e o próximo passo. Para consultar no celular com o aparelho aberto.
             </p>
@@ -124,8 +118,8 @@ function Index() {
         <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
           <CarouselContent>
             {samples.map((s, i) => (
-              <CarouselItem key={s} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                <img src={s} alt={`Página de diagnóstico ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" width={760} height={1139} className="h-auto w-full rounded-xl border bg-card shadow-card" />
+              <CarouselItem key={s.src} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
+                <img {...s} sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 310px" alt={`Página de diagnóstico ${i + 1}`} loading="lazy" decoding="async" className="h-auto w-full rounded-xl border bg-card shadow-card" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -157,8 +151,8 @@ function Index() {
         <Carousel setApi={setApiDepo} opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
           <CarouselContent>
             {testimonials.map((t, i) => (
-              <CarouselItem key={t} className="basis-[75%] sm:basis-1/2 lg:basis-1/3">
-                <img src={t} alt={`Depoimento de cliente ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" width={941} height={1672} className="h-auto w-full rounded-xl border bg-card shadow-card" />
+              <CarouselItem key={t.src} className="basis-[75%] sm:basis-1/2 lg:basis-1/3">
+                <img {...t} sizes="(max-width: 639px) 75vw, (max-width: 1023px) 45vw, 310px" alt={`Depoimento de cliente ${i + 1}`} loading="lazy" decoding="async" className="h-auto w-full rounded-xl border bg-card shadow-card" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -169,7 +163,7 @@ function Index() {
 
       <Section title="Tudo o que você recebe">
         <div className="grid items-center gap-10 md:grid-cols-2">
-          <img src="/mockups/pacote.webp" alt="Pacote completo" loading="lazy" decoding="async" width={1100} height={626} className="h-auto w-full" />
+          <img {...pageImages.pacote} sizes="(max-width: 767px) calc(100vw - 40px), 492px" alt="Pacote completo" loading="lazy" decoding="async" className="h-auto w-full" />
           <div>
             <p className="mb-4 font-semibold">Diagnósticos organizados por sintoma e sistema:</p>
             <ol className="grid gap-2">
@@ -192,7 +186,7 @@ function Index() {
                 <div className="relative w-4/5">
                   <div className="absolute inset-0 translate-x-3 translate-y-2 rotate-6 rounded-sm bg-white shadow-md" />
                   <div className="absolute inset-0 translate-x-1.5 translate-y-1 rotate-3 rounded-sm bg-white shadow-md" />
-                  <img src={`/mockups/bonus-${i + 1}.webp`} alt={t} loading="lazy" decoding="async" width={700} height={989} style={{ imageRendering: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }} className="relative h-auto w-full rounded-sm border border-black/5 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
+                  <img {...pageImages[`bonus-${i + 1}` as keyof typeof pageImages]} sizes="(max-width: 767px) 65vw, 340px" alt={t} loading="lazy" decoding="async" style={{ imageRendering: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }} className="relative h-auto w-full rounded-sm border border-black/5 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]" />
                 </div>
               </div>
               <div className="p-6">

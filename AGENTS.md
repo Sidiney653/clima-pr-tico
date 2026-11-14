@@ -31,3 +31,5 @@ use the editor.
 
 - Place site-wide tracking scripts in the root shell's head because TanStack Start has no index.html entry.
 - Merge page UTM parameters into checkout links after hydration and at click time, preserving checkout offers and any parameters added by tracking scripts.
+- Serve page imagery through CDN asset pointers with responsive variants and intrinsic dimensions; prioritize only the first image to reduce mobile transfers without layout shifts.
+- Advance carousels only while visible and the document is active, so offscreen slides do not compete with initial page loading.

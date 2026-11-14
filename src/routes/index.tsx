@@ -24,6 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 const samples = Array.from({ length: 16 }, (_, i) => i + 1).map((n) => `/mockups/diagnostico-${n}.webp`);
+const testimonials = Array.from({ length: 10 }, (_, i) => i + 1).map((n) => `/mockups/depoimento-${n}.webp`);
 
 const features = [
   ["Ilustração que aponta onde olhar", "Cada página mostra o aparelho com os pontos numerados: você vê exatamente qual componente verificar."],
@@ -84,11 +85,17 @@ function Section({ title, children, className = "" }: { title?: string; children
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [apiDepo, setApiDepo] = useState<CarouselApi>();
   useEffect(() => {
     if (!api) return;
     const id = setInterval(() => api.scrollNext(), 3000);
     return () => clearInterval(id);
   }, [api]);
+  useEffect(() => {
+    if (!apiDepo) return;
+    const id = setInterval(() => apiDepo.scrollNext(), 3000);
+    return () => clearInterval(id);
+  }, [apiDepo]);
   return (
     <main>
       <div className="bg-primary px-4 py-2 text-center text-xs font-semibold text-primary-foreground md:text-sm">

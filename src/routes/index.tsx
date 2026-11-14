@@ -134,7 +134,21 @@ function Index() {
         </Carousel>
       </Section>
 
-      <Section className="bg-muted" title="O que cada página de diagnóstico traz">
+      <Section className="bg-muted" title="Veja o que nossos clientes estão dizendo sobre o Guia de Diagnóstico para Ar-Condicionado">
+        <Carousel setApi={setApiDepo} opts={{ align: "start", loop: true }} className="mx-auto w-full max-w-5xl px-2 md:px-12">
+          <CarouselContent>
+            {testimonials.map((t, i) => (
+              <CarouselItem key={t} className="basis-[75%] sm:basis-1/2 lg:basis-1/3">
+                <img src={t} alt={`Depoimento de cliente ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" width={941} height={1672} className="h-auto w-full rounded-xl border bg-card shadow-card" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
+      </Section>
+
+      <Section title="O que cada página de diagnóstico traz">
         <div className="grid gap-4 md:grid-cols-2">
           {features.map(([t, d]) => (
             <div key={t} className="flex gap-3 rounded-xl border bg-card p-5"><Check /><div><h3 className="font-bold">{t}</h3><p className="mt-1 text-sm text-muted-foreground">{d}</p></div></div>

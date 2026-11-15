@@ -2,11 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { withCheckoutUtms } from "@/lib/checkout-tracking";
 import { pageImages } from "@/assets/page-images";
+import splitMockupSmall from "@/assets/page-images/split-mockup-480.webp.asset.json";
+import splitMockupLarge from "@/assets/page-images/split-mockup-768.webp.asset.json";
 import { useVisibleCarouselAutoplay } from "@/hooks/use-visible-carousel-autoplay";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const IMG2 = "https://origin.mentoriaprocesso.com/img/5afc6802-7b23-4428-aa4c-fe7f86e07546/d08bb98d-db0f-451f-aa55-124b86c1d482/";
-const HERO = { src: "https://drive.google.com/thumbnail?id=1pWYojGJ_Frwg7Ijq82GUu0ITd47paNDD&sz=w2000", width: 512, height: 512 };
+const HERO = { src: splitMockupLarge.url, srcSet: `${splitMockupSmall.url} 480w, ${splitMockupLarge.url} 768w`, width: 768, height: 768 };
 const CHECKOUT_BASIC = "https://checkout.wiven.com.br/checkout/cmwcvuz8n23x401q2do1f5s45?offer=EBD6LD7";
 const CHECKOUT_FULL = "https://checkout.wiven.com.br/checkout/cmwcw3kic247401pv6blb2533?offer=Y7WJELC";
 

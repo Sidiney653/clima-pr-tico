@@ -64,10 +64,7 @@ import image62 from "./page-images/pacote-500.webp.asset.json";
 import image63 from "./page-images/pacote-1000.webp.asset.json";
 
 export const pageImages = {
-  "bonus-1": { src: image1.url, srcSet: image0.url + " 400w" + ", " + image1.url + " 700w", width: 700, height: 989 },
-  "bonus-2": { src: image3.url, srcSet: image2.url + " 400w" + ", " + image3.url + " 700w", width: 700, height: 989 },
-  "bonus-3": { src: image5.url, srcSet: image4.url + " 400w" + ", " + image5.url + " 700w", width: 700, height: 989 },
-  "bonus-4": { src: image7.url, srcSet: image6.url + " 400w" + ", " + image7.url + " 700w", width: 700, height: 989 },
+"bonus-1": { src: "/mockups/bonus-1-700.webp", srcSet: "/mockups/bonus-1-400.webp 400w, /mockups/bonus-1-700.webp 700w", width: 700, height: 932 }, "bonus-2": { src: "/mockups/bonus-2-700.webp", srcSet: "/mockups/bonus-2-400.webp 400w, /mockups/bonus-2-700.webp 700w", width: 700, height: 932 }, "bonus-3": { src: "/mockups/bonus-3-700.webp", srcSet: "/mockups/bonus-3-400.webp 400w, /mockups/bonus-3-700.webp 700w", width: 700, height: 932 }, "bonus-4": { src: "/mockups/bonus-4-700.webp", srcSet: "/mockups/bonus-4-400.webp 400w, /mockups/bonus-4-700.webp 700w", width: 700, height: 932 },
   "depoimento-1": { src: image9.url, srcSet: image8.url + " 400w" + ", " + image9.url + " 760w", width: 760, height: 1350 },
   "depoimento-10": { src: image11.url, srcSet: image10.url + " 400w" + ", " + image11.url + " 760w", width: 760, height: 1350 },
   "depoimento-2": { src: image13.url, srcSet: image12.url + " 400w" + ", " + image13.url + " 760w", width: 760, height: 1350 },
